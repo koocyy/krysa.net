@@ -1,4 +1,4 @@
-
+#ITS ON GITHUB YAYYYY
 import time
 from random import randint
 import urllib.request
