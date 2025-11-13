@@ -1,5 +1,5 @@
-My first README lol
+
 libs u need:
-requests
-urllib.request
+requests,
+urllib.request,
 colorama
