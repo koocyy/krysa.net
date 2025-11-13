@@ -84,6 +84,9 @@ while isregistered():
         time.sleep(1.5)
         break
 
+    elif current_cmd=="clear":
+        print("\n"*100)
+
 
     else:
         r = randint(50,100)
