@@ -27,7 +27,7 @@ def randFcolor():
     return colors[rand]
 
 def randBcolor():
-    rand = randint(0, 6)
+    rand = randint(0, 5)
     colors = [
         Back.LIGHTRED_EX,
         Back.LIGHTGREEN_EX,
