@@ -75,7 +75,7 @@ while isregistered():
 
     elif current_cmd=="mkfriend" or current_cmd=="getafriend":
         print(Fore.LIGHTGREEN_EX + "Starting getafriend protocol..." + Style.RESET_ALL)
-        open("broadcast.py")
+        iwantafriend()
 
 
     elif current_cmd=="exit" or current_cmd=="x":
