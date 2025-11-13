@@ -59,7 +59,8 @@ def welcome():
         usr_data = json.load(read_file)
         print("Welcome " + Fore.LIGHTYELLOW_EX + usr_data['nickname'] + Style.RESET_ALL + "!")
 
-welcome()
+if isregistered():
+    welcome()
 
 while isregistered():
     current_cmd = input(Style.BRIGHT + Fore.LIGHTGREEN_EX + ">> " + Style.RESET_ALL)
