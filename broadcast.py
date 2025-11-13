@@ -2,46 +2,44 @@ import requests
 import urllib.request
 import json
 
-json_url = "https://api.jsonbin.io/v3/b/69139b6bae596e708f532eb8"
-# !!! plain text !!! zmenit pred sdilenim !!!
-MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
-headry = {
-    'X-Master-Key': MASTER_KEY
-}
-PUTheadry = {
-    'Content-Type': 'application/json',
-    'X-Master-Key': MASTER_KEY
-}
-external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-nickname =  ""
+nickname = ""
 tag = ""
 
+def iwantafriend():
+    def get_usr_data():
+        global nickname
+        global tag
+        with open("usr_data.json", mode="r", encoding="utf-8") as read_file:
+            usr_data = json.load(read_file)
+            nickname = usr_data['nickname']
+            tag = usr_data['tag']
 
-def get_usr_data():
-    global nickname
-    global tag
-    with open("usr_data.json", mode="r", encoding="utf-8") as read_file:
-        usr_data = json.load(read_file)
-        nickname = usr_data['nickname']
-        tag = usr_data['tag']
-
-
-req = requests.get(url=json_url, json=None, headers=headry)
-bcast_list = req.json()
-Bcast_List = bcast_list['record']
-print(Bcast_List)
-print("-----------------------------")
-get_usr_data()
-new_key = external_ip
-new_value = {
+    # !!! plain text !!! zmenit pred sdilenim !!!
+    MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
+    headry = {
+        'X-Master-Key': MASTER_KEY
+    }
+    PUTheadry = {
+        'Content-Type': 'application/json',
+        'X-Master-Key': MASTER_KEY
+    }
+    external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
+    json_url = "https://api.jsonbin.io/v3/b/69139b6bae596e708f532eb8"
+    req = requests.get(url=json_url, json=None, headers=headry)
+    bcast_list = req.json()
+    Bcast_List = bcast_list['record']
+    print("PUVODNI:\n" + str(Bcast_List))
+    get_usr_data()
+    new_key = external_ip
+    new_value = {
     'nickname': nickname,
     'tag': tag,
     'wantsAFriend': True
-}
-Bcast_List[new_key] = new_value
-new_json = json.dumps(Bcast_List, indent=2)
-print(new_json)
-update = requests.put(url=json_url, data=new_json, headers=PUTheadry)
-print(update.status_code)
+    }
+    Bcast_List[new_key] = new_value
+    new_json = json.dumps(Bcast_List, indent=2)
+    print("POSILAM:\n" + str(new_json))
+    update = requests.put(url=json_url, data=new_json, headers=PUTheadry)
+    print(update.status_code)
 
 

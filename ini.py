@@ -6,6 +6,8 @@ import json
 import colorama
 from colorama import Fore, Style, Back
 import os
+import broadcast
+from broadcast import iwantafriend
 
 colorama.init(autoreset=True)
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
@@ -48,7 +50,6 @@ def isregistered():
         }
         with open("usr_data.json", mode="w", encoding="utf-8") as write_file:
             json.dump(usr_data, write_file)
-        print("Welcome " + Fore.LIGHTYELLOW_EX + nickname + Style.RESET_ALL + "!")
         return True
     else:
         print("Neco je spatne!")
