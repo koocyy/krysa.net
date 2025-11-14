@@ -6,7 +6,6 @@ import json
 import colorama
 from colorama import Fore, Style, Back
 import os
-import broadcast
 from broadcast import iwantafriend
 
 colorama.init(autoreset=True)
