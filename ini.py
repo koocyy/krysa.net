@@ -74,8 +74,8 @@ while isregistered():
         print(Style.DIM + randBcolor() + randFcolor() + external_ip + Style.RESET_ALL)
 
 
-    elif current_cmd=="mkfriend" or current_cmd=="getafriend":
-        print(Fore.LIGHTGREEN_EX + "Starting getafriend protocol..." + Style.RESET_ALL)
+    elif current_cmd=="iwantafriend" or current_cmd=="iwf":
+        print(Fore.LIGHTGREEN_EX + "Adding you to looking-for-friends list..." + Style.RESET_ALL)
         iwantafriend()
 
 
