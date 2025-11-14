@@ -45,6 +45,7 @@ def isregistered():
         return True
     elif is_he==False:
         nickname = input("nickname" + randFcolor() + " --> " + Style.RESET_ALL)
+        gen_keys()
         usr_data = {
             "nickname": nickname,
             "tag": randint(0, 1000)
@@ -61,8 +62,21 @@ def welcome():
         usr_data = json.load(read_file)
         print("Welcome " + Fore.LIGHTYELLOW_EX + usr_data['nickname'] + Style.RESET_ALL + "!")
 
+def are_keys_generated():
+    if os.path.exists("public.pem")==True and os.path.exists("private.pem")==True:
+        print("Yep")
+        return True
+    else:
+        gen_keys()
+        print("Please restart the application!")
+        return False
+
 if isregistered():
-    welcome()
+    if are_keys_generated():
+        welcome()
+    else:
+        quit()
+
 
 while isregistered():
     current_cmd = input(Style.BRIGHT + Fore.LIGHTGREEN_EX + ">> " + Style.RESET_ALL)
