@@ -7,6 +7,8 @@ import colorama
 from colorama import Fore, Style, Back
 import os
 from broadcast import iwantafriend
+from keys import gen_keys
+
 
 colorama.init(autoreset=True)
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
