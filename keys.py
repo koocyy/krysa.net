@@ -1,7 +1,7 @@
 import rsa
 
 
-def gen_keys:
+def gen_keys():
     #private_key_pass = "631252726692175"
     #can be used later for private key encryption :)
     public_key, private_key = rsa.newkeys(1024)
