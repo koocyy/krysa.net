@@ -14,7 +14,7 @@ def iwantafriend():
             nickname = usr_data['nickname']
             tag = usr_data['tag']
 
-    # !!! plain text !!! zmenit pred sdilenim !!!
+    # ---THE UPDATE---
     MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
     headry = {
         'X-Master-Key': MASTER_KEY
@@ -28,9 +28,11 @@ def iwantafriend():
     req = requests.get(url=json_url, json=None, headers=headry)
     bcast_list = req.json()
     Bcast_List = bcast_list['record']
-    print("PUVODNI:\n" + str(Bcast_List))
     get_usr_data()
     new_object = external_ip
+
+    #formating??
+    print("PUVODNI:\n" + str(Bcast_List))
     new_value = {
     'nickname': nickname,
     'tag': tag,
@@ -38,6 +40,7 @@ def iwantafriend():
     Bcast_List[new_object] = new_value
     new_json = json.dumps(Bcast_List, indent=2)
     print("POSILAM:\n" + str(new_json))
+    #is the update alr?
     update = requests.put(url=json_url, data=new_json, headers=PUTheadry)
     print(update.status_code)
 
