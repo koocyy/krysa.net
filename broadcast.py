@@ -34,7 +34,6 @@ def iwantafriend():
     new_value = {
     'nickname': nickname,
     'tag': tag,
-    'wantsAFriend': True
     }
     Bcast_List[new_key] = new_value
     new_json = json.dumps(Bcast_List, indent=2)
