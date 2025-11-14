@@ -1,18 +1,28 @@
+import os
 import requests
 import urllib.request
 import json
 
+
 nickname = ""
 tag = ""
+public_key = ""
+
+t_key_dir = os.path.abspath(__file__)
+key_dir = t_key_dir.strip("broadcast.py") + "/mykeys"
 
 def iwantafriend():
     def get_usr_data():
         global nickname
         global tag
-        with open("usr_data.json", mode="r", encoding="utf-8") as read_file:
+        global public_key
+        with open("usr_data.json", "r", encoding="utf-8") as read_file:
             usr_data = json.load(read_file)
             nickname = usr_data['nickname']
             tag = usr_data['tag']
+
+        with open(f"{key_dir}/public.pem", "r") as p_key:
+            public_key = p_key.read()
 
     # ---THE UPDATE---
     MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
