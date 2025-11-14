@@ -30,12 +30,12 @@ def iwantafriend():
     Bcast_List = bcast_list['record']
     print("PUVODNI:\n" + str(Bcast_List))
     get_usr_data()
-    new_key = external_ip
+    new_object = external_ip
     new_value = {
     'nickname': nickname,
     'tag': tag,
     }
-    Bcast_List[new_key] = new_value
+    Bcast_List[new_object] = new_value
     new_json = json.dumps(Bcast_List, indent=2)
     print("POSILAM:\n" + str(new_json))
     update = requests.put(url=json_url, data=new_json, headers=PUTheadry)
