@@ -12,6 +12,8 @@ from keys import gen_keys
 
 colorama.init(autoreset=True)
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
+t_key_dir = os.path.abspath(__file__)
+key_dir = t_key_dir.strip("ini.py") + "/mykeys"
 
 
 def randFcolor():
@@ -63,8 +65,7 @@ def welcome():
         print("Welcome " + Fore.LIGHTYELLOW_EX + usr_data['nickname'] + Style.RESET_ALL + "!")
 
 def are_keys_generated():
-    if os.path.exists("public.pem")==True and os.path.exists("private.pem")==True:
-        print("Yep")
+    if os.path.exists(f"{key_dir}/public.pem")==True and os.path.exists(f"{key_dir}/private.pem")==True:
         return True
     else:
         gen_keys()
