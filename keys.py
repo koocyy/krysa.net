@@ -1,3 +1,4 @@
+import os
 import rsa
 
 
@@ -6,10 +7,18 @@ def gen_keys():
     #can be used later for private key encryption :)
     public_key, private_key = rsa.newkeys(1024)
 
-    with open("public.pem", "wb") as f:
+    t_path = os.path.abspath(__file__)
+    path = t_path.strip("\\keys.py") + "/mykeys"
+    if os.path.exists(path):
+        print("")
+    else:
+        os.mkdir("mykeys")
+
+
+    with open(f"{path}/public.pem", "wb") as f:
         f.write(public_key.save_pkcs1("PEM"))
 
-    with open("private.pem", "wb") as f:
+    with open(f"{path}/private.pem", "wb") as f:
         f.write(private_key.save_pkcs1("PEM"))
 
 
