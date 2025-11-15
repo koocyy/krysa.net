@@ -6,7 +6,7 @@ import json
 import colorama
 from colorama import Fore, Style, Back
 import os
-from broadcast import iwantafriend
+from iwf import iwantafriend
 from keys import gen_keys
 
 

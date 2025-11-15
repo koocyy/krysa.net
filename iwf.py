@@ -9,7 +9,7 @@ tag = ""
 public_key = ""
 
 t_key_dir = os.path.abspath(__file__)
-key_dir = t_key_dir.strip("broadcast.py") + "/mykeys"
+key_dir = t_key_dir.strip("iwf.py") + "/mykeys"
 
 def iwantafriend():
     def get_usr_data():
