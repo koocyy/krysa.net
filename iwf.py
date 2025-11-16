@@ -12,7 +12,7 @@ MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
 IP = ""
 
 t_key_dir = os.path.abspath(__file__)
-key_dir = t_key_dir.strip("iwf.py") + "/mykeys"
+key_dir = t_key_dir.strip("iwf.py") + "mykeys"
 
 def iwantafriend():
     def get_usr_data():
@@ -79,6 +79,8 @@ def givemeafriend():
     for ip, user_data in f_list.items():
         if isinstance(user_data, dict) and user_data.get('nickname') == decis_nick:
             IP = str(ip)
-
-    with open("friends.json", mode="w", encoding="utf-8") as write_file:
-        json.dump(f_list[IP], write_file, indent=2)
+            friend_nick = user_data['nickname']
+            public__key = user_data['public_key']
+            print(f"{friend_nick}\n{public__key}")
+            with open(f"{key_dir}/{friend_nick}_public_key.pem", "w") as f:
+                f.write(public__key)
