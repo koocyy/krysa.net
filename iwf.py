@@ -29,7 +29,6 @@ def iwantafriend():
             public_key = p_key.read()
 
     # ---THE UPDATE---
-    MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
     headry = {
         'X-Master-Key': MASTER_KEY
     }
