@@ -6,7 +6,7 @@ import json
 import colorama
 from colorama import Fore, Style, Back
 import os
-from iwf import iwantafriend
+from iwf import iwantafriend, givemeafriend
 from keys import gen_keys
 
 
@@ -93,6 +93,9 @@ while isregistered():
     elif current_cmd=="iwantafriend" or current_cmd=="iwf":
         print(Fore.LIGHTGREEN_EX + "Adding you to looking-for-friends list..." + Style.RESET_ALL)
         iwantafriend()
+        print(Fore.LIGHTGREEN_EX + "Getting other users who want a friend..." + Style.RESET_ALL)
+        time.sleep(2)
+        givemeafriend()
 
 
     elif current_cmd=="exit" or current_cmd=="x":

@@ -7,6 +7,7 @@ import json
 nickname = ""
 tag = ""
 public_key = ""
+MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
 
 t_key_dir = os.path.abspath(__file__)
 key_dir = t_key_dir.strip("iwf.py") + "/mykeys"
@@ -16,6 +17,7 @@ def iwantafriend():
         global nickname
         global tag
         global public_key
+        global MASTER_KEY
         with open("usr_data.json", "r", encoding="utf-8") as read_file:
             usr_data = json.load(read_file)
             nickname = usr_data['nickname']
@@ -53,5 +55,18 @@ def iwantafriend():
     print("POSILAM:\n" + str(new_json))
     #is the update alr?
     update = requests.put(url=json_url, data=new_json, headers=PUTheadry)
-    print(update.status_code)
+    return print(update.status_code)
 
+def givemeafriend():
+    json_url = "https://api.jsonbin.io/v3/b/69139b6bae596e708f532eb8"
+    headry = {
+        'X-Master-Key': MASTER_KEY
+    }
+    req = requests.get(url=json_url, json=None, headers=headry)
+    F_list = req.json()
+    f_list = F_list['record']
+
+    for f_list['nickname'] in f_list:
+        n = 0
+        nu = n + 1
+        print(nu)
