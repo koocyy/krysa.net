@@ -2,12 +2,14 @@ import os
 import requests
 import urllib.request
 import json
+from colorama import Style, Fore, Back
 
 
 nickname = ""
 tag = ""
 public_key = ""
 MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
+IP = ""
 
 t_key_dir = os.path.abspath(__file__)
 key_dir = t_key_dir.strip("iwf.py") + "/mykeys"
@@ -58,6 +60,7 @@ def iwantafriend():
     return print(update.status_code)
 
 def givemeafriend():
+    global IP
     json_url = "https://api.jsonbin.io/v3/b/69139b6bae596e708f532eb8"
     headry = {
         'X-Master-Key': MASTER_KEY
@@ -66,7 +69,16 @@ def givemeafriend():
     F_list = req.json()
     f_list = F_list['record']
 
-    for f_list['nickname'] in f_list:
-        n = 0
-        nu = n + 1
-        print(nu)
+    for ip, user_data in f_list.items():
+
+        print(Fore.LIGHTMAGENTA_EX + user_data['nickname'] + Style.RESET_ALL)
+
+    print(Fore.LIGHTYELLOW_EX + "Type the nickname of which user you want to add." + Style.RESET_ALL)
+    decis_nick = input(Style.BRIGHT + Fore.LIGHTYELLOW_EX + ">> " + Style.RESET_ALL)
+
+    for ip, user_data in f_list.items():
+        if isinstance(user_data, dict) and user_data.get('nickname') == decis_nick:
+            IP = str(ip)
+
+    with open("friends.json", mode="w", encoding="utf-8") as write_file:
+        json.dump(f_list[IP], write_file, indent=2)
