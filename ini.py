@@ -8,7 +8,7 @@ from colorama import Fore, Style, Back
 import os
 from iwf import iwantafriend, givemeafriend
 from keys import gen_keys
-
+from messages import sendmessage
 
 colorama.init(autoreset=True)
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
@@ -95,6 +95,12 @@ while isregistered():
         iwantafriend()
         print(Fore.LIGHTGREEN_EX + "Getting other users who want a friend..." + Style.RESET_ALL)
         givemeafriend()
+
+
+    elif current_cmd=="send" or current_cmd=="snd":
+        who = input(Fore.LIGHTYELLOW_EX + "To who? >> " + Style.RESET_ALL)
+        what = input(Fore.LIGHTYELLOW_EX + "And what >> " + Style.RESET_ALL)
+        sendmessage(who, what)
 
 
     elif current_cmd=="exit" or current_cmd=="x":
