@@ -105,7 +105,6 @@ while isregistered():
 
     elif current_cmd=="exit" or current_cmd=="x":
         print(Fore.LIGHTRED_EX + "Exiting...")
-        time.sleep(1.67)
         break
 
     elif current_cmd=="clear":
