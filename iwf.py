@@ -44,8 +44,8 @@ def iwantafriend():
     get_usr_data()
     new_object = external_ip
 
-    #formating??
-    print("PUVODNI:\n" + str(Bcast_List))
+    ##formating??
+    #print("PUVODNI:\n" + str(Bcast_List))
     new_value = {
     'nickname': nickname,
     'tag': tag,
@@ -53,10 +53,10 @@ def iwantafriend():
     }
     Bcast_List[new_object] = new_value
     new_json = json.dumps(Bcast_List, indent=2)
-    print("POSILAM:\n" + str(new_json))
-    #is the update alr?
-    update = requests.put(url=json_url, data=new_json, headers=PUTheadry)
-    return print(update.status_code)
+    #print("POSILAM:\n" + str(new_json))
+    ##is the update alr?
+    requests.put(url=json_url, data=new_json, headers=PUTheadry)
+    #return print(update.status_code)
 
 def givemeafriend():
     global IP
@@ -80,6 +80,6 @@ def givemeafriend():
             IP = str(ip)
             friend_nick = user_data['nickname']
             public__key = user_data['public_key']
-            print(f"{friend_nick}\n{public__key}")
+            #print(f"{friend_nick}\n{public__key}")
             with open(f"{key_dir}/{friend_nick}_public_key.pem", "w") as f:
                 f.write(public__key)
