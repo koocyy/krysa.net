@@ -16,6 +16,7 @@ t_key_dir = os.path.abspath(__file__)
 key_dir = t_key_dir.strip("ini.py") + "/mykeys"
 
 
+
 def randFcolor():
     rand = randint(0, 6)
     colors = [
