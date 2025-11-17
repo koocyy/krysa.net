@@ -8,7 +8,7 @@ from colorama import Fore, Style, Back
 import os
 from iwf import iwantafriend, givemeafriend
 from keys import gen_keys
-from messages import sendmessage
+from messages import send_message, get_messages
 
 colorama.init(autoreset=True)
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
@@ -75,6 +75,7 @@ def are_keys_generated():
 if isregistered():
     if are_keys_generated():
         welcome()
+        get_messages()
     else:
         quit()
 

@@ -9,7 +9,7 @@ t_key_dir = os.path.abspath(__file__)
 key_dir = t_key_dir.strip("messages.py") + "mykeys"
 MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
 
-def sendmessage(nickname, message):
+def send_message(nickname, message):
     global MASTER_KEY
 
     try:
@@ -40,7 +40,23 @@ def sendmessage(nickname, message):
         print(Fore.LIGHTRED_EX + "You dont have that user added or used a space at the end." + Style.RESET_ALL)
 
 
-
+def get_messages():
+    headry = {
+        'X-Master-Key': MASTER_KEY
+    }
+    json_url = "https://api.jsonbin.io/v3/b/691a506843b1c97be9b1c553"
+    req = requests.get(url=json_url, json=None, headers=headry)
+    mess = req.json()
+    messages = mess['record']
+    my_messages = messages['k']
+    def h():
+        if len(my_messages)>1:
+            h = "s."
+            return h
+        else:
+            h = "."
+            return h
+    print(Fore.LIGHTGREEN_EX + "You have " + Fore.LIGHTBLUE_EX + str(len(my_messages)) + Fore.LIGHTGREEN_EX + f" message{h()}" + Style.RESET_ALL)
 
 
     ''' with open(f"{key_dir}/private.pem", "rb") as f:
