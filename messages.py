@@ -30,6 +30,7 @@ def send_message(nickname, message):
         messages = mess['record']
         print(str(messages) + "\n-----------------\n")
         n_object = nickname
+        if
         n_val = str(enc_message)
         messages[n_object] = n_val
         new_mess = json.dumps(messages, indent=2)
