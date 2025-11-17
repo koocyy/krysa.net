@@ -100,7 +100,7 @@ while isregistered():
     elif current_cmd=="send" or current_cmd=="snd":
         who = input(Fore.LIGHTYELLOW_EX + "To who? >> " + Style.RESET_ALL)
         what = input(Fore.LIGHTYELLOW_EX + "And what >> " + Style.RESET_ALL)
-        sendmessage(who, what)
+        send_message(who, what)
 
 
     elif current_cmd=="exit" or current_cmd=="x":
