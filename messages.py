@@ -1,6 +1,5 @@
 import os
 import requests
-import urllib.request
 import json
 from colorama import Style, Fore, Back
 import rsa
