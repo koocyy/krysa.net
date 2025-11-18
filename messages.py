@@ -8,9 +8,11 @@ import rsa
 t_key_dir = os.path.abspath(__file__)
 key_dir = t_key_dir.strip("messages.py") + "mykeys"
 MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
+last_message_num = ""
 
 def send_message(nickname, message):
     global MASTER_KEY
+    global last_message_num
 
     try:
         with open(f"{key_dir}/{nickname}_public_key.pem", "rb") as f:
@@ -29,12 +31,18 @@ def send_message(nickname, message):
         mess = req.json()
         messages = mess['record']
         print(str(messages) + "\n-----------------\n")
-        n_object = nickname
-        if
+        with open("usr_data.json", mode="r", encoding="utf-8") as read_file:
+            usr_data = json.load(read_file)
+            my_nickname = usr_data['nickname']
+        for users, Messages in messages.items():
+            if users==usr_data['nickname']:
+                for num, zpravy in Messages.items():
+                    last_message_num = num
+        my_messages = messages[my_nickname]
+        n_object = str(int(last_message_num) + 1)
         n_val = str(enc_message)
-        messages[n_object] = n_val
+        my_messages[n_object] = n_val
         new_mess = json.dumps(messages, indent=2)
-        print(new_mess)
         update = requests.put(url=json_url, data=new_mess, headers=PUTheadry)
         return print(update.status_code)
     except:
