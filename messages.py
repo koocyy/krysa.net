@@ -30,7 +30,6 @@ def send_message(nickname, message):
         req = requests.get(url=json_url, json=None, headers=headry)
         mess = req.json()
         messages = mess['record']
-        print(str(messages) + "\n-----------------\n")
         with open("usr_data.json", mode="r", encoding="utf-8") as read_file:
             usr_data = json.load(read_file)
             my_nickname = usr_data['nickname']
@@ -67,8 +66,11 @@ def get_messages():
             return h
     print(Fore.LIGHTGREEN_EX + "You have " + Fore.LIGHTBLUE_EX + str(len(my_messages)) + Fore.LIGHTGREEN_EX + f" message{h()}" + Style.RESET_ALL)
 
-
-    ''' with open(f"{key_dir}/private.pem", "rb") as f:
+'''def decrypt_messages():
+    headry = {
+        'X-Master-Key': MASTER_KEY
+    }
+         with open(f"{key_dir}/private.pem", "rb") as f:
         private_key = rsa.PrivateKey.load_pkcs1(f.read())
     clear_mes = rsa.decrypt(enc_message, private_key)
     clear_mess = str(clear_mes)
