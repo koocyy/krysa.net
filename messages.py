@@ -3,6 +3,8 @@ import requests
 import json
 from colorama import Style, Fore, Back
 import rsa
+from base64 import b64encode, b64decode
+
 
 t_key_dir = os.path.abspath(__file__)
 key_dir = t_key_dir.strip("messages.py") + "mykeys"
@@ -12,11 +14,14 @@ last_message_num = ""
 def send_message(nickname, message):
     global MASTER_KEY
     global last_message_num
-
+    with open("usr_data.json", mode="r", encoding="utf-8") as read_file:
+        usr_data = json.load(read_file)
+        my_nickname = usr_data['nickname']
+    n_message = my_nickname + ": " + message
     try:
         with open(f"{key_dir}/{nickname}_public_key.pem", "rb") as f:
             public_key = rsa.PublicKey.load_pkcs1(f.read())
-        enc_message = rsa.encrypt(message.encode(), public_key)
+        enc_message = rsa.encrypt(n_message.encode('utf-8'), public_key)
 
         headry = {
             'X-Master-Key': MASTER_KEY
@@ -33,12 +38,15 @@ def send_message(nickname, message):
             usr_data = json.load(read_file)
             my_nickname = usr_data['nickname']
         for users, Messages in messages.items():
-            if users==usr_data['nickname']:
-                for num, zpravy in Messages.items():
-                    last_message_num = num
-        my_messages = messages[my_nickname]
+            if users==nickname:
+                if len(Messages)<1:
+                    last_message_num = 0
+                else:
+                    for num, zpravy in Messages.items():
+                            last_message_num = num
+        my_messages = messages[nickname]
         n_object = str(int(last_message_num) + 1)
-        n_val = str(enc_message)
+        n_val = b64encode(enc_message).decode('utf-8')
         my_messages[n_object] = n_val
         new_mess = json.dumps(messages, indent=2)
         update = requests.put(url=json_url, data=new_mess, headers=PUTheadry)
@@ -47,7 +55,7 @@ def send_message(nickname, message):
         print(Fore.LIGHTRED_EX + "You dont have that user added or used a space at the end." + Style.RESET_ALL)
 
 
-def get_messages():
+def get_messages_num():
     headry = {
         'X-Master-Key': MASTER_KEY
     }
@@ -65,13 +73,23 @@ def get_messages():
             return h
     print(Fore.LIGHTGREEN_EX + "You have " + Fore.LIGHTBLUE_EX + str(len(my_messages)) + Fore.LIGHTGREEN_EX + f" message{h()}" + Style.RESET_ALL)
 
-'''def decrypt_messages():
+def decrypt_messages():
+    with open("usr_data.json", mode="r", encoding="utf-8") as read_file:
+        usr_data = json.load(read_file)
+        my_nickname = usr_data['nickname']
     headry = {
         'X-Master-Key': MASTER_KEY
     }
-         with open(f"{key_dir}/private.pem", "rb") as f:
-        private_key = rsa.PrivateKey.load_pkcs1(f.read())
-    clear_mes = rsa.decrypt(enc_message, private_key)
-    clear_mess = str(clear_mes)
-    print(clear_mess.strip("b'"))
-    '''
+    json_url = "https://api.jsonbin.io/v3/b/691a506843b1c97be9b1c553"
+    req = requests.get(url=json_url, json=None, headers=headry)
+    mess = req.json()
+    messages = mess['record']
+    my_messages = messages[my_nickname]
+    for num, message in my_messages.items():
+        print(Fore.LIGHTBLUE_EX + num + Style.RESET_ALL + "\t")
+        with open(f"{key_dir}/private.pem", "rb") as f:
+            private_key = rsa.PrivateKey.load_pkcs1(f.read())
+        message_bytes = b64decode(message)
+        clear_mes = rsa.decrypt(message_bytes, private_key)
+        clear_mess = clear_mes.decode('utf-8')
+        print(clear_mess + "\n")
