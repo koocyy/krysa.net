@@ -84,9 +84,12 @@ if isregistered():
 while isregistered():
     current_cmd = input(Style.BRIGHT + Fore.LIGHTGREEN_EX + ">> " + Style.RESET_ALL)
     if current_cmd=="help" or current_cmd=="?" or current_cmd=="h":
-        print(Fore.LIGHTGREEN_EX + "x / exit" + Style.RESET_ALL + " -- Exits.\n" + Fore.LIGHTGREEN_EX + "help / ? / h" + Style.RESET_ALL + " -- Shows this help info.")
-        print(Fore.LIGHTGREEN_EX + "ip / myip" + Style.RESET_ALL + " -- Shows your current public IP adress.")
-
+        print(Fore.LIGHTGREEN_EX + "x / exit" + Style.RESET_ALL + "\t-- Exits.\n" + Fore.LIGHTGREEN_EX + "help / ? / h" + Style.RESET_ALL + " -- Shows this help info.")
+        print(Fore.LIGHTGREEN_EX + "ip / myip" + Style.RESET_ALL + "\t-- Shows your current public IP adress.")
+        print(Fore.LIGHTGREEN_EX + "iwf / iwantafriend" + Style.RESET_ALL + "\t-- Starts the iwf.py script which will allow you to add friends :).")
+        print(Fore.LIGHTGREEN_EX + "snd / send" + Style.RESET_ALL + "\t-- Lets you send a message to a friend!")
+        print(Fore.LIGHTGREEN_EX + "gm / getmessages" + Style.RESET_ALL + "\t-- Lists messages from people to you.")
+        print(Fore.LIGHTGREEN_EX + "clear" + Style.RESET_ALL + "\t-- Clears the terminal window (adds 100 lines of nothing).")
 
     elif current_cmd=="ip" or current_cmd=="myip":
         print(Style.DIM + randBcolor() + randFcolor() + external_ip + Style.RESET_ALL)
