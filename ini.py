@@ -112,6 +112,11 @@ while isregistered():
         decrypt_messages()
 
 
+    elif current_cmd == "rm" or current_cmd == "removemessage":
+        n = input(Fore.LIGHTYELLOW_EX + "Message number? >> " + Style.RESET_ALL)
+        remove_message(n)
+
+
     elif current_cmd=="exit" or current_cmd=="x":
         print(Fore.LIGHTRED_EX + "Exiting...")
         break

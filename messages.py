@@ -93,3 +93,27 @@ def decrypt_messages():
         clear_mes = rsa.decrypt(message_bytes, private_key)
         clear_mess = clear_mes.decode('utf-8')
         print(clear_mess + "\n")
+
+def remove_message(numero):
+    with open("usr_data.json", mode="r", encoding="utf-8") as read_file:
+        usr_data = json.load(read_file)
+        my_nickname = usr_data['nickname']
+    headry = {
+        'X-Master-Key': MASTER_KEY
+    }
+    PUTheadry = {
+        'Content-Type': 'application/json',
+        'X-Master-Key': MASTER_KEY
+    }
+    json_url = "https://api.jsonbin.io/v3/b/691a506843b1c97be9b1c553"
+    req = requests.get(url=json_url, json=None, headers=headry)
+    mess = req.json()
+    messages = mess['record']
+    my_messages = messages[my_nickname]
+    for num, message in my_messages.items():
+        if num==numero:
+            my_messages.pop(numero)
+            break
+    new_mess = json.dumps(messages, indent=2)
+    update = requests.put(url=json_url, data=new_mess, headers=PUTheadry)
+    return print(update.status_code)
