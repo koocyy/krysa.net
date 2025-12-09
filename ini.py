@@ -8,7 +8,7 @@ from colorama import Fore, Style, Back
 import os
 from iwf import iwantafriend, givemeafriend
 from keys import gen_keys
-from messages import send_message, get_messages_num, decrypt_messages
+from messages import send_message, get_messages_num, decrypt_messages, remove_message
 
 colorama.init(autoreset=True)
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
