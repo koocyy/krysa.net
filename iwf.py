@@ -75,13 +75,15 @@ def givemeafriend():
 
     print(Fore.LIGHTYELLOW_EX + "Type the nickname of which user you want to add." + Style.RESET_ALL)
     decis_nick = input(Style.BRIGHT + Fore.LIGHTYELLOW_EX + ">> " + Style.RESET_ALL)
-
-    for ip, user_data in f_list.items():
-        if isinstance(user_data, dict) and user_data.get('nickname') == decis_nick:
-            IP = str(ip)
-            friend_nick = user_data['nickname']
-            public__key = user_data['public_key']
-            #print(f"{friend_nick}\n{public__key}")
-            with open(f"{key_dir}/{friend_nick}_public_key.pem", "w") as f:
-                f.write(public__key)
-    print(Fore.LIGHTMAGENTA_EX + friend_nick + Fore.LIGHTGREEN_EX + " has been added to your friends list! Type " + Fore.LIGHTCYAN_EX + 'flist' + Fore.LIGHTGREEN_EX + " to show your friends list." +Style.RESET_ALL)
+    try:
+        for ip, user_data in f_list.items():
+            if isinstance(user_data, dict) and user_data.get('nickname') == decis_nick:
+                IP = str(ip)
+                friend_nick = user_data['nickname']
+                public__key = user_data['public_key']
+                # print(f"{friend_nick}\n{public__key}")
+                with open(f"{key_dir}/{friend_nick}_public_key.pem", "w") as f:
+                    f.write(public__key)
+        print(Fore.LIGHTMAGENTA_EX + friend_nick + Fore.LIGHTGREEN_EX + " has been added to your friends list! Type " + Fore.LIGHTCYAN_EX + 'flist' + Fore.LIGHTGREEN_EX + " to show your friends list." + Style.RESET_ALL)
+    except:
+        print(Fore.LIGHTRED_EX + "Wrong username." + Style.RESET_ALL)
