@@ -89,6 +89,7 @@ while isregistered():
         print(Fore.LIGHTGREEN_EX + "iwf / iwantafriend" + Style.RESET_ALL + "\t-- Starts the iwf.py script which will allow you to add friends :).")
         print(Fore.LIGHTGREEN_EX + "snd / send" + Style.RESET_ALL + "\t-- Lets you send a message to a friend!")
         print(Fore.LIGHTGREEN_EX + "gm / getmessages" + Style.RESET_ALL + "\t-- Lists messages from people to you.")
+        print(Fore.LIGHTGREEN_EX + "rm x / removemessage x" + Style.RESET_ALL + "\t-- Removes message number x.")
         print(Fore.LIGHTGREEN_EX + "clear" + Style.RESET_ALL + "\t-- Clears the terminal window (adds 100 lines of nothing).")
 
     elif current_cmd=="ip" or current_cmd=="myip":
