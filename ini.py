@@ -8,7 +8,7 @@ from colorama import Fore, Style, Back
 import os
 from iwf import iwantafriend, givemeafriend
 from keys import gen_keys
-from messages import send_message, get_messages_num, decrypt_messages, remove_message
+from messages import send_message, get_messages_num, decrypt_messages, remove_message, get_mynickname
 
 colorama.init(autoreset=True)
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
@@ -61,9 +61,7 @@ def isregistered():
         return False
 
 def welcome():
-    with open("usr_data.json", mode="r", encoding="utf-8") as read_file:
-        usr_data = json.load(read_file)
-        print("Welcome " + Fore.LIGHTYELLOW_EX + usr_data['nickname'] + Style.RESET_ALL + "!")
+    print("Welcome " + Fore.LIGHTYELLOW_EX + get_mynickname() + Style.RESET_ALL + "!")
 
 def are_keys_generated():
     if os.path.exists(f"{key_dir}/public.pem")==True and os.path.exists(f"{key_dir}/private.pem")==True:
