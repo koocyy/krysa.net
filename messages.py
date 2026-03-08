@@ -66,11 +66,9 @@ def get_messages_num():
     my_messages = messages['k']
     def h():
         if len(my_messages)>1:
-            h = "s."
-            return h
+            return "s."
         else:
-            h = "."
-            return h
+            return "."
     print(Fore.LIGHTGREEN_EX + "You have " + Fore.LIGHTBLUE_EX + str(len(my_messages)) + Fore.LIGHTGREEN_EX + f" message{h()}" + Style.RESET_ALL)
 
 def decrypt_messages():
