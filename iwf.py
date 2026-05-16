@@ -3,12 +3,13 @@ import requests
 import urllib.request
 import json
 from colorama import Style, Fore, Back
+from dotenv import load_dotenv
 
-
+load_dotenv()
 nickname = ""
 tag = ""
 public_key = ""
-MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
+MASTER_KEY = os.getenv("MASTER_KEY")
 IP = ""
 n = 0
 t_key_dir = os.path.abspath(__file__)

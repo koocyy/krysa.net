@@ -40,7 +40,9 @@ def randBcolor():
         Back.LIGHTMAGENTA_EX,
         Back.LIGHTCYAN_EX,
     ]
+    time.sleep
     return colors[rand]
+
 
 def isregistered():
     is_he = os.path.exists("usr_data.json")
@@ -86,7 +88,7 @@ while isregistered():
         print(Fore.LIGHTGREEN_EX + "ip / myip" + Style.RESET_ALL + "\t-- Shows your current public IP adress.")
         print(Fore.LIGHTGREEN_EX + "iwf / iwantafriend" + Style.RESET_ALL + "\t-- Starts the iwf.py script which will allow you to add friends :).")
         print(Fore.LIGHTGREEN_EX + "snd / send" + Style.RESET_ALL + "\t-- Lets you send a message to a friend!")
-        print(Fore.LIGHTGREEN_EX + "gm / getmessages" + Style.RESET_ALL + "\t-- Lists messages from people to you.")
+        print(Fore.LIGHTGREEN_EX + "gm / getmessages" + Style.RESET_ALL + "\t-- Lists incoming messages.")
         print(Fore.LIGHTGREEN_EX + "rm x / removemessage x" + Style.RESET_ALL + "\t-- Removes message number x.")
         print(Fore.LIGHTGREEN_EX + "clear" + Style.RESET_ALL + "\t-- Clears the terminal window (adds 100 lines of nothing).")
 

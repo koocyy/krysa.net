@@ -4,11 +4,12 @@ import json
 from colorama import Style, Fore, Back
 import rsa
 from base64 import b64encode, b64decode
+from dotenv import load_dotenv
 
-
+load_dotenv()
 t_key_dir = os.path.abspath(__file__)
 key_dir = t_key_dir.strip("messages.py") + "mykeys"
-MASTER_KEY = '$2a$10$CmT1z5R8IU3f.vQP.uitxuGo8J0nTGTGKBwZIEU89yqki62s7pwfS'
+MASTER_KEY = os.getenv("MASTER_KEY")
 last_message_num = ""
 
 def get_mynickname():
