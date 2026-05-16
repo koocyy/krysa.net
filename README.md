@@ -3,4 +3,5 @@ libs u need:
 requests,
 urllib.request,
 colorama,
-rsa
+rsa,
+python-dotenv
