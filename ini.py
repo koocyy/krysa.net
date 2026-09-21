@@ -129,6 +129,6 @@ while isregistered():
     else:
         r = randint(50,100)
         if r==67:
-            print(Fore.LIGHTMAGENTA_EX + "\\O/ i dunno this one gng" + Style.RESET_ALL)
+            print(Fore.LIGHTMAGENTA_EX + "67" + Style.RESET_ALL)
         else:
             print("Unknown command! Use " + Fore.LIGHTGREEN_EX +  "help" + Style.RESET_ALL + ", " + Fore.LIGHTGREEN_EX +  "h" + Style.RESET_ALL +" or " + Fore.LIGHTGREEN_EX +  "?" + Style.RESET_ALL +" for help. ")

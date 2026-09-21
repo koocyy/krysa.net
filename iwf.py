@@ -65,8 +65,7 @@ def givemeafriend():
         'X-Master-Key': MASTER_KEY
     }
     req = requests.get(url=json_url, json=None, headers=headry)
-    F_list = req.json()
-    f_list = F_list['record']
+    f_list = req.json()['record']
     print(Fore.LIGHTGREEN_EX + "Found " + Fore.LIGHTBLUE_EX + str(len(f_list)) + Fore.LIGHTGREEN_EX + " users who want a friend:" + Style.RESET_ALL)
 
     for ip, user_data in f_list.items():
