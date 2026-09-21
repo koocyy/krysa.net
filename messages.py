@@ -17,16 +17,20 @@ def get_mynickname():
         usr_data = json.load(read_file)
         return usr_data['nickname']
 
+
 def send_message(nickname, message):
     global MASTER_KEY
     global last_message_num
     n_message = get_mynickname() + ": " + message
+
     try:
         with open(f"{key_dir}/{nickname}_public_key.pem", "rb") as f:
             public_key = rsa.PublicKey.load_pkcs1(f.read())
             enc_message = rsa.encrypt(n_message.encode('utf-8'), public_key)
+
     except:
         print(Fore.LIGHTRED_EX + "You dont have that user added, or you installed the rsa library wrong." + Style.RESET_ALL)
+
     try:
         headry = {
             'X-Master-Key': MASTER_KEY
@@ -37,31 +41,32 @@ def send_message(nickname, message):
         }
         json_url = "https://api.jsonbin.io/v3/b/691a506843b1c97be9b1c553"
         req = requests.get(url=json_url, json=None, headers=headry)
+
     except:
         print(Fore.LIGHTRED_EX + req.status_code + Style.RESET_ALL)
-    #try:
-    mess = req.json()
-    messages = mess['record']
-    for users, Messages in messages.items():
-        if users == nickname:
-            if len(Messages) < 1:
-                last_message_num = 0
-            else:
-                for num, zpravy in Messages.items():
-                    last_message_num = num
-        else:
-            last_message_num = 0
-    messages.setdefault(nickname, {})
-    my_messages = messages[nickname]
-    n_object = str(int(last_message_num) + 1)
-    n_val = b64encode(enc_message).decode('utf-8')
-    my_messages[n_object] = n_val
-    new_mess = json.dumps(messages, indent=2)
-    update = requests.put(url=json_url, data=new_mess, headers=PUTheadry)
-    return print(update.status_code)
 
-    #except:
-    #    print(Fore.LIGHTRED_EX + "You dont have that user added or used a space at the end." + Style.RESET_ALL)
+    try:
+        mess = req.json()
+        messages = mess['record']
+        for users, Messages in messages.items():
+            if users == nickname:
+                if len(Messages) < 1:
+                    last_message_num = 0
+                else:
+                    last_message_num = len(Messages)
+            else:
+                last_message_num = 0
+        messages.setdefault(nickname, {})
+        my_messages = messages[nickname]
+        n_object = str(int(last_message_num) + 1)
+        n_val = b64encode(enc_message).decode('utf-8')
+        my_messages[n_object] = n_val
+        new_mess = json.dumps(messages, indent=2)
+        update = requests.put(url=json_url, data=new_mess, headers=PUTheadry)
+        return print(update.status_code)
+
+    except:
+        print(Fore.LIGHTRED_EX + "You dont have that user added or used a space at the end." + Style.RESET_ALL)
 
 
 def get_messages_num():
@@ -72,16 +77,21 @@ def get_messages_num():
     req = requests.get(url=json_url, json=None, headers=headry)
     mess = req.json()
     messages = mess['record']
+
     try:
         my_messages = messages[get_mynickname()]
         def h():
             if len(my_messages) > 1:
                 return "s."
-            else:
+            elif len(my_messages) == 1:
                 return "."
+            else:
+                return "s."
         print(Fore.LIGHTGREEN_EX + "You have " + Fore.LIGHTBLUE_EX + str(len(my_messages)) + Fore.LIGHTGREEN_EX + f" message{h()}" + Style.RESET_ALL)
+
     except:
         print(Fore.LIGHTRED_EX + "You have no messages." + Style.RESET_ALL)
+
 
 def decrypt_messages():
     headry = {
@@ -91,6 +101,7 @@ def decrypt_messages():
     req = requests.get(url=json_url, json=None, headers=headry)
     mess = req.json()
     messages = mess['record']
+
     try:
         my_messages = messages[get_mynickname()]
         for num, message in my_messages.items():
@@ -101,8 +112,10 @@ def decrypt_messages():
             clear_mes = rsa.decrypt(message_bytes, private_key)
             clear_mess = clear_mes.decode('utf-8')
             print(clear_mess + "\n")
+
     except:
         print(Fore.LIGHTRED_EX + "You have no messages." + Style.RESET_ALL)
+
 
 def remove_message(numero):
     headry = {
