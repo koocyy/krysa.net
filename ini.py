@@ -40,7 +40,6 @@ def randBcolor():
         Back.LIGHTMAGENTA_EX,
         Back.LIGHTCYAN_EX,
     ]
-    time.sleep
     return colors[rand]
 
 
